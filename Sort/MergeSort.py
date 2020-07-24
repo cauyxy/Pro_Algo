@@ -1,23 +1,23 @@
 ###归并排序
 
-def merge(arr, l, r, m):
+def merge(arr, l, r, m):    #合并函数
     n1 = m - l + 1
     n2 = r - m
 
-    L = [0 for _ in range(0, n1)]
-    R = [0 for _ in range(0, n2)]
+    L = [0 for _ in range(0, n1)]     
+    R = [0 for _ in range(0, n2)]     
 
-    for i in range(0, n1):
+    for i in range(0, n1):     #L存储待排序数组的左半部分
         L[i] = arr[l + i]
 
-    for j in range(0, n2):
+    for j in range(0, n2):     #R存储待排序数组的右半部分
         R[j] = arr[m + j + 1]
 
     i = 0
     j = 0
     k = l
 
-    while i < n1 and j < n2:
+    while i < n1 and j < n2:    #将L和R中按从小到大顺序移到数组中
         if L[i] < R[j]:
             arr[k] = L[i]
             i += 1
@@ -27,7 +27,7 @@ def merge(arr, l, r, m):
             j += 1
             k += 1
 
-    while i < n1:
+    while i < n1:      #将L和R中剩余元素移到arr中
         arr[k] = L[i]
         k += 1
         i += 1
@@ -38,7 +38,7 @@ def merge(arr, l, r, m):
         j += 1
 
 
-def MergeSort(arr, l, r):
+def MergeSort(arr, l, r):      #递归进行归并排序
     if l < r:
         m = int((l + r - 1) / 2)
         MergeSort(arr, l, m)
