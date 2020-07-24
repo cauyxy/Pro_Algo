@@ -2,7 +2,8 @@ import pickle
 
 
 class Node:
-    def __init__(self, name, cate, level, time, desc):
+    def __init__(self, id, name, cate, level, time, desc):
+        self.id = id
         self.name = name
         self.cate = cate
         self.level = level
@@ -16,6 +17,9 @@ class Node:
             self.pre_list.append(node)
         else:
             self.aft_list.append(node)
+
+    def __cmp__(self, other):
+        return self.level < other.level
 
 
 def dump2file(filename, Nodes):
@@ -32,3 +36,6 @@ def load2prog(filename):
         for _ in range(num_nodes):
             Nodes.append(pickle.load(f))
     return Nodes
+
+
+
