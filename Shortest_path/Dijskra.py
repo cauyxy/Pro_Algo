@@ -1,4 +1,4 @@
-###Dijskra算法
+###Dijskra
 
 inf = float('inf')
 
