@@ -64,3 +64,5 @@ def BM(input,target):
                 loaction.append(i)
                 i += 1
                 j = len(input)
+if __name__=="__main__":
+    print(BM("哈","哈哈哈"))
