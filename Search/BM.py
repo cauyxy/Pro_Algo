@@ -1,3 +1,7 @@
+#coding:utf-8
+'''
+BM算法
+'''
 def GetBC(pattern):
     # 预生成坏字符表
     BMBC = dict()
@@ -64,5 +68,3 @@ def BM(input,target):
                 loaction.append(i)
                 i += 1
                 j = len(input)
-if __name__=="__main__":
-    print(BM("哈","哈哈哈"))

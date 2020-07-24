@@ -1,5 +1,5 @@
 #coding:utf-8
-from CutWord import CutWord
+from Search.CutWord import CutWord
 from pypinyin import lazy_pinyin
 '''
 Levenshtein算法
