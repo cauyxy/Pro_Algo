@@ -1,5 +1,4 @@
 #coding:utf-8
-from CutWord import CutWord
 '''
 KMP算法
 '''
