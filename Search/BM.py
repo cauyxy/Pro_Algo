@@ -3,19 +3,19 @@
 BM算法
 '''
 def GetBC(pattern):
-    # 预生成坏字符表
-    BMBC = dict()
+    # 生成坏字符表
+    BCDict = dict()
     for i in range(len(pattern) - 1):
-        # 记录坏字符最右位置（不包括模式串最右侧字符）
-        BMBC[pattern[i]] = i + 1
-    return BMBC
+        # 用字典记录坏字符表内容
+        BCDict[pattern[i]] = i + 1
+    return BCDict
 
 def GetGS(pattern):
-    # 预生成好后缀表
-    BMGS = dict()
+    # 生成好后缀表
+    GSDict = dict()
 
     # 无后缀仅根据坏字移位符规则
-    BMGS[''] = 0
+    GSDict[''] = 0
 
     for i in range(len(pattern)):
 
@@ -29,8 +29,8 @@ def GetGS(pattern):
 
             # 记录模式串中好后缀最靠右位置（除结尾处）
             if GS == NGS:
-                BMGS[GS] = len(pattern) - j - i - 1
-    return BMGS
+                GSDict[GS] = len(pattern) - j - i - 1
+    return GSDict
 
 def BM(input,target):
     """
@@ -68,3 +68,4 @@ def BM(input,target):
                 loaction.append(i)
                 i += 1
                 j = len(input)
+    return loaction
