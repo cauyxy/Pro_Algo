@@ -1,8 +1,9 @@
-from models import *
+###归并排序nlog,数据量较大时，速度慢于快排，需要额外的空间开销，用于保存数组
 from cmps import *
-###归并排序
+from Shortest_path.Dijskra import Dijsktra
+import models
 
-def merge(arr, l, r, m,cmp):    #合并函数
+def merge(arr, l, r, m,cmp,dis=[]):    #合并函数
     n1 = m - l + 1
     n2 = r - m
 
@@ -20,7 +21,7 @@ def merge(arr, l, r, m,cmp):    #合并函数
     k = l
 
     while i < n1 and j < n2:    #将L和R中按从小到大顺序移到数组中
-        if cmp(L[i],R[j]):
+        if cmp(L[i],R[j],dis):
             arr[k] = L[i]
             i += 1
             k += 1
@@ -40,11 +41,11 @@ def merge(arr, l, r, m,cmp):    #合并函数
         j += 1
 
 
-def MergeSort(arr, l, r,cmp):      #递归进行归并排序
+def MergeSort(arr, l, r,cmp,dis=[]):      #递归进行归并排序
     if l < r:
         m = int((l + r - 1) / 2)
-        MergeSort(arr, l, m,cmp)
-        MergeSort(arr, m + 1, r,cmp)
-        merge(arr, l, r, m,cmp)
+        MergeSort(arr, l, m,cmp,dis)
+        MergeSort(arr, m + 1, r,cmp,dis)
+        merge(arr, l, r, m,cmp,dis)
     return arr
 
