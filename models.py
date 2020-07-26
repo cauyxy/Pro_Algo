@@ -24,6 +24,9 @@ class Node:
     def __lt__(self, other):
         return self.level < other.level
 
+    def setLevel(self, level):
+        self.level = level
+
 
 def dump2file(filename, Nodes):
     with open(filename, "wb") as f:
