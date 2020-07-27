@@ -21,8 +21,6 @@ def IsLearnable(LearntLevel, AftLevel, Grades):
             return 1
         else:
             return 0
-    else:
-        return 0
 
 def Count(LearntNodes_id,Grades):
     CountList={x:0 for x in range(1,21)}
