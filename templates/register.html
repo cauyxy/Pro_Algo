@@ -5,6 +5,26 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>Register</title>
     <link rel="stylesheet" href="https://unpkg.com/mobi.css/dist/mobi.min.css">
+
+    <script>
+        function verification() {
+            var email = document.getElementById("email").value;
+            var httpRequest = new XMLHttpRequest();
+            var url = "/verification?email=" + email;
+            httpRequest.open('GET', url, true);//第二步：打开连接  将请求参数写在url中  ps:"./Ptest.php?name=test&nameone=testone"
+            httpRequest.send();
+            httpRequest.onreadystatechange = function () {
+                if (httpRequest.readyState === 4 && httpRequest.status === 200) {
+                    var text = httpRequest.responseText;
+                    if (text === "Ok")
+                        alert("验证码已发送！");
+                    else
+                        alert("ERROR")
+                }
+            }
+        }
+    </script>
+
 </head>
 <body>
 <div class="flex-center">
@@ -13,8 +33,11 @@
             <div class="unit-1-2 unit-1-on-mobile">
                 <h3>Register</h3>
                 <form class="form" action="/register" method="post" enctype="multipart/form-data">
-                    <label for="email">Email:</label><input id="email" name="email" type="email">
+                    <label for="email">Email:</label><input id="email" name="email" type="email" value="{{ email }}">
                     <label for="password">Password:</label><input id="password" name="password" type="password">
+                    <label for="code">Verification Code:</label><input id="code" name="code" type="number">
+                    <input type="button" value="SEND" onclick="verification()">
+                    <p style="color: red">{{ err }}</p>
                     <button type="submit" class="btn btn-primary btn-block">注册</button>
                 </form>
             </div>

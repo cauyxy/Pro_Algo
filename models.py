@@ -1,4 +1,8 @@
 import pickle
+import random
+import smtplib
+from email.header import Header
+from email.mime.text import MIMEText
 
 
 class Node:
@@ -56,6 +60,7 @@ def load2prog(filename):
             Nodes.append(pickle.load(f))
     return Nodes
 
+
 def To_Graph():  # 创建图的邻接矩阵
     Nodes = load2prog('../data.dat')
     length = len(Nodes)
@@ -64,3 +69,31 @@ def To_Graph():  # 创建图的邻接矩阵
         for aft_node in node.aft_list:
             edgs[node.id - 1][aft_node.id - 1] = 1
     return edgs
+
+
+def email_sender(receiver):
+    mail_host = "smtp.qq.com"
+    mail_user = "1034618831@qq.com"
+    mail_pass = "bllgbumvetbvbfcd"
+
+    sender = '1034618831@qq.com"'
+    receivers = [f'{receiver}']
+
+    val_code = random.randint(100000, 999999)
+
+    message = MIMEText(f'Your Verification code is {val_code}', 'plain', 'utf-8')
+
+    message['From'] = Header("Val")
+    message['To'] = Header("CODE")
+
+    subject = 'Verification code'
+    message['Subject'] = Header(subject, 'utf-8')
+
+    try:
+        smtpObj = smtplib.SMTP()
+        smtpObj.connect(mail_host, 587)
+        smtpObj.login(mail_user, mail_pass)
+        smtpObj.sendmail(sender, receivers, message.as_string())
+        return str(val_code)
+    except smtplib.SMTPException:
+        return "0"
