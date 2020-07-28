@@ -62,7 +62,7 @@ def load2prog(filename):
 
 
 def To_Graph():  # 创建图的邻接矩阵
-    Nodes = load2prog('../data.dat')
+    Nodes = load2prog('data.dat')
     length = len(Nodes)
     edgs = [[float('inf')] * length for _ in range(length)]
     for node in Nodes:
