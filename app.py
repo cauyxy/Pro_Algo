@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request
 from models import *
+from Zy.Sort_by_similarity import Sort_by_similarity
 
 app = Flask(__name__)
 
@@ -87,10 +88,10 @@ def details():
     node_id = request.values.get("id")
     node = get_Node(eval(node_id))
 
-    # TODO: 完成sim_node的计算
-    sim_nodes = 0
 
-    return render_template("details.html", node=node)
+    nodes=Sort_by_similarity(node)
+
+    return render_template("details.html", node=node,sim_nodes=nodes[1:6])
 
 
 @app.route('/updatescore', methods=["get"])
