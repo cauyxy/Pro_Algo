@@ -23,4 +23,5 @@ def Levenshtein(input, target):
                 dp[i][j] = dp[i - 1][j - 1]
             else:
                 dp[i][j] = min(dp[i][j - 1], dp[i - 1][j], dp[i - 1][j - 1]) + 1
+    #+2是为了区分完全匹配字符串的结果
     return dp[-1][-1]+2

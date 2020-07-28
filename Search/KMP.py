@@ -2,17 +2,17 @@
 '''
 KMP算法
 '''
-def GetNext(str):
+def GetNext(input):
     #得到next数组
-    n = len(str)
+    n = len(input)
     next = [0, 0]
     j = 0
     for i in range(1, n):
-        while j > 0 and str[i] != str[j]:
-            #如果说遇见不等就更新next
+        while j > 0 and input[i] != input[j]:
+            #如果前后缀遇见不等就更新next，该长度为最长前后缀
             j = next[j]
-        if str[i] == str[j]:
-            #如果相等next继续累加
+        if input[i] == input[j]:
+            #如果相等则继续累加
             j += 1
         next.append(j)
     return next

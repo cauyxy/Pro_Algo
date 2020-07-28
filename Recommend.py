@@ -6,6 +6,7 @@ def GetNode(id):
             return node
 
 def IsLearnable(LearntLevel, AftLevel, Grades):
+    #通过已学习知识点难度、分数和后续知识点难度判断该后续知识点是否可推荐
     if((AftLevel - LearntLevel)>4):
         if Grades>=80:
             return 1
@@ -23,6 +24,7 @@ def IsLearnable(LearntLevel, AftLevel, Grades):
             return 0
 
 def Count(LearntNodes_id,Grades):
+    # 统计推荐节点记录次数，进行推荐排序
     CountList={x:0 for x in range(1,21)}
     for i in range(len(LearntNodes_id)):
         LearntNode=GetNode(LearntNodes_id[i])
@@ -34,6 +36,7 @@ def Count(LearntNodes_id,Grades):
     return CountListAftSort
 
 def GetRecommendNodes(CountListAftSort):
+    #给出推荐知识点序列
     RecommendNodes=[]
     for i in range(len(CountListAftSort)):
         if(CountListAftSort[i][1]>0):
@@ -41,6 +44,7 @@ def GetRecommendNodes(CountListAftSort):
     return RecommendNodes
 
 def Recommend(LearntNodes_id,Grades):
+    #推荐算法
     CountListAftSort=Count(LearntNodes_id,Grades)
     return GetRecommendNodes(CountListAftSort)
 
