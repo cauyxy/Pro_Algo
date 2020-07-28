@@ -28,6 +28,19 @@ class Node:
         self.level = level
 
 
+class User:
+    def __init__(self, id, email, password):
+        self.id = id
+        self.email = email
+        self.password = password
+        self.learned = []
+        self.score = {}
+
+    def add(self, node_id, score):
+        self.learned.append(node_id)
+        self.score[node_id] = score
+
+
 def dump2file(filename, Nodes):
     with open(filename, "wb") as f:
         pickle.dump(len(Nodes), f)
@@ -43,14 +56,11 @@ def load2prog(filename):
             Nodes.append(pickle.load(f))
     return Nodes
 
-def To_Graph():      #创建图的邻接矩阵
+def To_Graph():  # 创建图的邻接矩阵
     Nodes = load2prog('../data.dat')
-    length=len(Nodes)
-    edgs=[[float('inf')] * length for _ in range(length)]
+    length = len(Nodes)
+    edgs = [[float('inf')] * length for _ in range(length)]
     for node in Nodes:
         for aft_node in node.aft_list:
-            edgs[node.id-1][aft_node.id-1]=1
+            edgs[node.id - 1][aft_node.id - 1] = 1
     return edgs
-
-
-

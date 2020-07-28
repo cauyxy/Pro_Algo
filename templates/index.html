@@ -19,6 +19,25 @@
     <link rel='stylesheet' id='custom-css-css' href='../static/css/custom.html?ver=1.0' type='text/css'
           media='all'/>
 
+    <script>
+        function update_score(user_id, id) {
+            var score = document.getElementById(id).value;
+            var httpRequest = new XMLHttpRequest();
+            var url = "/updatescore?user_id=" + user_id + "&id=" + id + "&score=" + score;
+            httpRequest.open('GET', url, true);//第二步：打开连接  将请求参数写在url中  ps:"./Ptest.php?name=test&nameone=testone"
+            httpRequest.send();
+            httpRequest.onreadystatechange = function () {
+                if (httpRequest.readyState === 4 && httpRequest.status === 200) {
+                    var text = httpRequest.responseText;
+                    if (text === "Ok")
+                        alert("Update Score Success!");
+                    else
+                        alert("ERROR")
+                }
+            }
+        }
+    </script>
+
 </head>
 
 <body>
@@ -85,9 +104,11 @@
                         <ul class="articles">
                             {% for node in nodes_part1 %}
                                 <li class="article-entry standard">
-                                    <h4><a href="/details?id={{ node.id }}">{{ node.name }}</a></h4>
-                                    <span class="article-meta">25 Feb, 2013 in <a href="#"
-                                                                                  title="View all posts in Server &amp; Database">Server &amp; Database</a></span>
+                                    <h4><a href="/details?id={{ node.id }}&user_id={{ user_id }}">{{ node.name }}</a>
+                                    </h4>
+                                    <span class="article-meta"><label for="{{ node.id }}">Score: </label><input
+                                            id="{{ node.id }}" type="number">
+                                    <input value="Submit" type="button" onclick="update_score({{ user_id }},{{ node.id }})"></span>
                                 </li>
                             {% endfor %}
                         </ul>
@@ -99,9 +120,11 @@
                         <ul class="articles">
                             {% for node in nodes_part2 %}
                                 <li class="article-entry standard">
-                                    <h4><a href="/details?id={{ node.id }}">{{ node.name }}</a></h4>
-                                    <span class="article-meta">25 Feb, 2013 in <a href="#"
-                                                                                  title="View all posts in Server &amp; Database">Server &amp; Database</a></span>
+                                    <h4><a href="/details?id={{ node.id }}&user_id={{ user_id }}">{{ node.name }}</a>
+                                    </h4>
+                                    <span class="article-meta"><label for="{{ node.id }}">Score: </label><input
+                                            id="{{ node.id }}" type="number">
+                                    <input value="Submit" type="button" onclick="update_score({{ user_id }},{{ node.id }})"></span>
                                 </li>
                             {% endfor %}
                         </ul>

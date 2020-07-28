@@ -4,6 +4,11 @@ from models import *
 app = Flask(__name__)
 
 Nodes = load2prog("data.dat")
+try:
+    Users = load2prog("user.dat")
+except:
+    Users = []
+next_id = len(Users) + 100
 
 
 def get_Node(id):
@@ -11,21 +16,74 @@ def get_Node(id):
         if id == node.id:
             return node
 
+def get_User(user_id):
+    for user in Users:
+        if user_id == user.id:
+            return user
+
+
+def login_match(email, password):
+    for user in Users:
+        if email == user.email and password == user.password:
+            return user.id
+    return False
+
 
 @app.route('/')
-def hello_world():
-    return render_template("index.html", nodes_part1=Nodes[:10], nodes_part2=Nodes[10:])
+@app.route('/login', methods=["get", "post"])
+def login():
+    if request.method == "GET":
+        return render_template("login.html")
+    else:
+        email = request.form.get("email")
+        password = request.form.get("password")
+
+        user_id = login_match(email, password)
+
+        if user_id:
+            return render_template("index.html", user_id=user_id, nodes_part1=Nodes[:10], nodes_part2=Nodes[10:])
+        else:
+            return render_template("login.html", err="Illegal Login")
+
+
+@app.route('/register', methods=["get", "post"])
+def register(next_id=next_id):
+    if request.method == "GET":
+        return render_template("register.html")
+    else:
+        email = request.form.get("email")
+        password = request.form.get("password")
+
+        u = User(next_id, email, password)
+        Users.append(u)
+        dump2file("user.dat", Users)
+        next_id += 1
+
+        return render_template("login.html")
 
 
 @app.route('/details', methods=["get", "post"])
 def details():
+    user_id = request.values.get("user_id")
     node_id = request.values.get("id")
     node = get_Node(eval(node_id))
 
     # TODO: 完成sim_node的计算
     sim_nodes = 0
 
-    return render_template("single.html", node=node)
+    return render_template("details.html", node=node)
+
+@app.route('/updatescore', methods=["get"])
+def updatescore():
+    user_id = request.values.get("user_id")
+    node_id = request.values.get("id")
+    score = request.values.get("score")
+    user = get_User(eval(user_id))
+    user.add(node_id,score)
+    dump2file("user.dat", Users)
+
+    return "Ok"
+
 
 
 if __name__ == '__main__':
