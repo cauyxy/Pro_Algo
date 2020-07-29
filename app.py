@@ -1,6 +1,10 @@
 from flask import Flask, render_template, request
 from models import *
 from Zy.Sort_by_similarity import Sort_by_similarity
+from Search.search import Search
+from FindPreAft.FindPre import FindPre
+from FindPreAft.FindAft import FindAft
+from Recommend.recommend import Recommend
 
 app = Flask(__name__)
 
@@ -134,7 +138,7 @@ def search():
     request_str = request.form.get("s")
 
     # TODO: 完成定义 ---字符串搜索
-    result_nodes = Nodes
+    result_nodes = Search(request_str)
 
     return render_template("node_list.html", msg="字符串搜索", nodes=result_nodes)
 
@@ -154,7 +158,7 @@ def search_1():
     else:
         score = eval(request.values.get("score"))
         # TODO: 完成定义  -------给我推荐
-        result_nodes = Nodes
+        result_nodes = Recommend(node_id,score)
         return render_template("node_list.html", msg="给我推荐", nodes=result_nodes)
 
 
