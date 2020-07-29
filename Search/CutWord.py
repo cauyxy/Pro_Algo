@@ -1,3 +1,4 @@
+#coding:utf-8
 import jieba
 from pypinyin import lazy_pinyin
 def CutWord(str):

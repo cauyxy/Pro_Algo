@@ -171,9 +171,11 @@ def search_1():
         return render_template("node_list.html", msg=f"{node.name}的前后续节点", nodes_pre=nodes_pre,nodes_aft=nodes_aft,fenlan=True)
     else:
         score = get_User(eval(node_id)).score
+        LearntNodes_id=[i for i in score.keys()]
+        Grades=[i for i in score.values()]
 
         # TODO: 完成定义  -------给我推荐
-        result_nodes = Recommend(node_id,score)
+        result_nodes = Recommend(LearntNodes_id,Grades)
         return render_template("node_list.html", msg="给我推荐", nodes=result_nodes)
 
 

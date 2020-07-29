@@ -30,10 +30,13 @@ def Search(input):
 
     for node in nodes:
         # 完全匹配搜索
-        MatchTarget=[node.id,node.name,node.desc,node.level]
+        MatchTarget=[node.name,node.desc]
         for i in range(len(MatchTarget)):
-            SelectRes=SelectAlogrithm(GetPinYin(input), GetPinYin(MatchTarget[i]))
-            if i>=2:
+            SelectRes=SelectAlogrithm(str(input),str(MatchTarget[i]))
+            if SelectRes==100:
+                SelectRes=SelectAlogrithm(GetPinYin(input), GetPinYin(MatchTarget[i]))
+                SelectRes+=1
+            if i==1 and SelectRes!=100:
                 SelectRes+=1
             ResNodes[node.id]=min(ResNodes[node.id],SelectRes)
 
@@ -48,9 +51,9 @@ def Search(input):
 
         if (ResNodes[node.id] == 100):
         #编辑距离搜索
-            ResNodes[node.id] = max(ResNodes[node.id], Levenshtein(GetPinYin(input),GetPinYin(desc_word[0])))
+            ResNodes[node.id] = max(ResNodes[node.id], Levenshtein(GetPinYin(input),GetPinYin(desc_word[0]))+5)
             for word in desc_word:
-                ResNodes[node.id] = min(ResNodes[node.id], Levenshtein(GetPinYin(input),GetPinYin(word)))
+                ResNodes[node.id] = min(ResNodes[node.id], Levenshtein(GetPinYin(input),GetPinYin(word))+5)
 
     ResNodesAftSort = sorted(ResNodes.items(), key=lambda item: item[1], reverse=False)
     for i in range(len(ResNodesAftSort)):
