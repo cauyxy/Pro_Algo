@@ -93,9 +93,12 @@
 
                     {{ node.desc }}
                 </article>
+                </br>
+                </br>
 
-
-                <span style="color: #0d90d1; font-size-adjust: initial;font-size: 20px">最短学时: {{ time }}</span>
+                <span style="color: #0d90d1; font-size-adjust: initial;font-size: 15px">最短学时: {{ time }}</span>
+                </br>
+                <span style="color: #0d90d1; font-size-adjust: initial;font-size: 15px">最短学习路径: </span>
                 <div class="span8 main-listing">
 
 
@@ -105,7 +108,7 @@
                             <header class="clearfix">
 
                                 <h3 class="post-title">
-                                    <a href="/details?id={{ node.id }}&user_id={{ user_id }}">{{ node.name }}</a>
+                                    <a style="font-size: 15px" href="/details?id={{ node.id }}&user_id={{ user_id }}">{{ node.name }}</a>
                                 </h3>
                             </header>
 
