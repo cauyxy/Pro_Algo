@@ -62,7 +62,14 @@
                 <div class="menu-top-menu-container">
                     <ul id="menu-top-menu" class="clearfix">
                         <li class="current-menu-item"><a href="index.html">Home</a></li>
-                        <li><a href="/artlist">Articles List</a></li>
+
+                        <li><a href="#">Articles List</a>
+                            <ul class="sub-menu" style="display: none;">
+                                <li><a href="/artlist?mode=0">Sort By Time</a></li>
+                                <li><a href="/artlist?mode=1">Sort By Level</a></li>
+                            </ul>
+                        </li>
+
                         <li><a href="faq.html">FAQs</a></li>
                     </ul>
                 </div>
@@ -96,6 +103,9 @@
     <div class="container">
         <div class="row">
 
+
+            <input value="给我推荐" type="button" onclick="window.location.href='/search_1?id={{ user_id }}&mode=1'">
+
             <!-- start of page content -->
             <div class="span8 page-content">
                 <!-- Basic Home Page Template -->
@@ -113,8 +123,6 @@
                                            onclick="update_score({{ user_id }},{{ node.id }})"></span>
                                     <span class="article-meta">
                                         <input value="前后续节点" type="button" onclick="window.location.href='/search_1?id={{ node.id }}&mode=0'">
-                                        &nbsp;&nbsp;&nbsp;
-                                        <input value="给我推荐" type="button" onclick="window.location.href='/search_1?id={{ node.id }}&mode=1&score={{ node.tmp_score }}'">
                                     </span>
                                 </li>
                             {% endfor %}
@@ -135,8 +143,6 @@
                                            onclick="update_score({{ user_id }},{{ node.id }})"></span>
                                     <span class="article-meta">
                                         <input value="前后续节点" type="button" onclick="window.location.href='/search_1?id={{ node.id }}&mode=0'">
-                                        &nbsp;&nbsp;&nbsp;
-                                        <input value="给我推荐" type="button" onclick="window.location.href='/search_1?id={{ node.id }}&mode=1&score={{ node.tmp_score }}'">
                                     </span>
                                 </li>
                             {% endfor %}

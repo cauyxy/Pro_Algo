@@ -97,6 +97,10 @@ def details():
 
     nodes = Sort_by_similarity(node)
 
+    '''
+    time,result_nodes = function(node)
+    '''
+
     return render_template("details.html", node=node, sim_nodes=nodes[1:6])
 
 
@@ -127,15 +131,22 @@ def verification():
 
 @app.route('/artlist', methods=["get"])
 def artlist():
+    mode = request.values.get("mode")
+
     # TODO: 更改到排序的知识点
-    result_nodes = Nodes
+    if mode=="0":
+        # Sort By Time
+        result_nodes = Nodes
+    else:
+        # Sort By Level
+        result_nodes = Nodes
 
     return render_template("node_list.html", nodes=result_nodes)
 
 
 @app.route("/search", methods=["post", "get"])
 def search():
-    request_str = request.form.get("s")
+    request_str = request.values.get("s")
 
     # TODO: 完成定义 ---字符串搜索
     result_nodes = Search(request_str)
@@ -156,7 +167,8 @@ def search_1():
         result_nodes = Nodes
         return render_template("node_list.html", msg=f"{node.name}的前后续节点", nodes=result_nodes)
     else:
-        score = eval(request.values.get("score"))
+        score = get_User(eval(node_id)).score
+
         # TODO: 完成定义  -------给我推荐
         result_nodes = Recommend(node_id,score)
         return render_template("node_list.html", msg="给我推荐", nodes=result_nodes)

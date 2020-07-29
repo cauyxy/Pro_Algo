@@ -1,5 +1,5 @@
 from models import load2prog
-nodes=load2prog("../data.dat")
+nodes=load2prog("data.dat")
 def DFS(node,PreNodeList):
     for Pre_node in node.pre_list:
         if(Pre_node not in PreNodeList):

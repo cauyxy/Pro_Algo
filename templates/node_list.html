@@ -53,7 +53,12 @@
                 <div class="menu-top-menu-container">
                     <ul id="menu-top-menu" class="clearfix">
                         <li><a href="index.html">Home</a></li>
-                        <li><a href="/artlist">Articles List</a></li>
+                        <li><a href="#">Articles List</a>
+                            <ul class="sub-menu" style="display: none;">
+                                <li><a href="/artlist?mode=0">Sort By Time</a></li>
+                                <li><a href="/artlist?mode=1">Sort By Level</a></li>
+                            </ul>
+                        </li>
                         <li><a href="faq.html">FAQs</a></li>
                     </ul>
                 </div>
@@ -89,6 +94,35 @@
             <!-- start of page content -->
             <div class="span8 main-listing">
                 <h2>{{ msg }}</h2>
+                <section class="span4 articles-list">
+                    <h4>前序节点</h4>
+
+                    <ul class="articles">
+                        {% for node in nodes_pre %}
+                            <li class="article-entry standard">
+                                <h4><a href="/details?id={{ node.id }}&user_id={{ user_id }}">{{ node.name }}</a>
+                                </h4>
+                            </li>
+                        {% endfor %}
+                    </ul>
+
+                </section>
+
+
+                <section class="span4 articles-list">
+                    <h4>后序节点</h4>
+
+                    <ul class="articles">
+                        {% for node in nodes_aft %}
+                            <li class="article-entry standard">
+                                <h4><a href="/details?id={{ node.id }}&user_id={{ user_id }}">{{ node.name }}</a>
+                                </h4>
+                            </li>
+                        {% endfor %}
+                    </ul>
+
+                </section>
+
                 {% for node in nodes %}
                     <article class="format-standard type-post hentry clearfix">
 
@@ -102,6 +136,8 @@
                     </article>
                 {% endfor %}
             </div>
+
+
 
 
             <!-- start of sidebar -->
