@@ -109,6 +109,26 @@
                 </article>
 
 
+                <span style="color: #0d90d1; font-size-adjust: initial;font-size: 20px">Time: {{ time }}</span>
+                <div class="span8 main-listing">
+
+
+                    {% for node in nodes %}
+                        <article class="format-standard type-post hentry clearfix">
+
+                            <header class="clearfix">
+
+                                <h3 class="post-title">
+                                    <a href="/details?id={{ node.id }}&user_id={{ user_id }}">{{ node.name }}</a>
+                                </h3>
+                            </header>
+
+                        </article>
+                    {% endfor %}
+                </div>
+
+
+
             </div>
             <!-- end of page content -->
 

@@ -97,11 +97,14 @@ def details():
 
     nodes = Sort_by_similarity(node)
 
+    # TODO： 完成Time，result_nodes
     '''
     time,result_nodes = function(node)
     '''
+    result_nodes = Nodes
+    time = 0
 
-    return render_template("details.html", node=node, sim_nodes=nodes[1:6])
+    return render_template("details.html", node=node, sim_nodes=nodes[1:6],nodes = result_nodes,time = time)
 
 
 @app.route('/updatescore', methods=["get"])
