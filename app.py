@@ -137,11 +137,13 @@ def artlist():
     if mode=="0":
         # Sort By Time
         result_nodes = Nodes
+        msg = "Sort By Time"
     else:
         # Sort By Level
         result_nodes = Nodes
+        msg = "Sort By Level"
 
-    return render_template("node_list.html", nodes=result_nodes)
+    return render_template("node_list.html", msg=msg,nodes=result_nodes)
 
 
 @app.route("/search", methods=["post", "get"])
@@ -164,8 +166,9 @@ def search_1():
     if mode == "0":
         # TODO: 完成定义 -------前后续节点
 
-        result_nodes = Nodes
-        return render_template("node_list.html", msg=f"{node.name}的前后续节点", nodes=result_nodes)
+        nodes_pre = Nodes
+        nodes_aft = Nodes
+        return render_template("node_list.html", msg=f"{node.name}的前后续节点", nodes_pre=nodes_pre,nodes_aft=nodes_aft,fenlan=True)
     else:
         score = get_User(eval(node_id)).score
 
