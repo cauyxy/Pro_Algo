@@ -5,7 +5,7 @@ import models
 
 
 def Sort_by_level():
-    nodes=models.load2prog('../data.dat')
+    nodes=models.load2prog('data.dat')
     sorted_nodes=QuickSort(nodes,cmp1)
     return sorted_nodes
 
