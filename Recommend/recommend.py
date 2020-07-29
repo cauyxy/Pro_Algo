@@ -5,20 +5,20 @@ def GetNode(id):
         if id==node.id:
             return node
 
-def IsLearnable(LearntLevel, AftLevel, Grades):
+def IsLearnable(LearntLevel, AftLevel, Grade):
     #通过已学习知识点难度、分数和后续知识点难度判断该后续知识点是否可推荐
     if((AftLevel - LearntLevel)>4):
-        if Grades>=80:
+        if Grade>=80:
             return 1
         else:
             return 0
     elif((AftLevel - LearntLevel) <= 4 and (AftLevel - LearntLevel) > 2):
-        if Grades>=70:
+        if Grade>=70:
             return 1
         else:
             return 0
     elif((AftLevel - LearntLevel) <= 2):
-        if Grades>=60:
+        if Grade>=60:
             return 1
         else:
             return 0
@@ -29,8 +29,7 @@ def Count(LearntNodes_id,Grades):
     for i in range(len(LearntNodes_id)):
         LearntNode=GetNode(LearntNodes_id[i])
         for AftNode in LearntNode.aft_list:
-            print(AftNode.name)
-            if IsLearnable(LearntNode.level,AftNode.level,Grades[i]):
+            if IsLearnable(LearntNode.level,AftNode.level,int(Grades[i])):
                 CountList[AftNode.id]+=1
     CountListAftSort=sorted(CountList.items(), key=lambda item:item[1], reverse=True)
     return CountListAftSort

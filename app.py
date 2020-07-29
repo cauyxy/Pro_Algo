@@ -149,10 +149,7 @@ def artlist():
 @app.route("/search", methods=["post", "get"])
 def search():
     request_str = request.values.get("s")
-
-    # TODO: 完成定义 ---字符串搜索
     result_nodes = Search(request_str)
-
     return render_template("node_list.html", msg="字符串搜索", nodes=result_nodes)
 
 
@@ -164,17 +161,13 @@ def search_1():
 
 
     if mode == "0":
-        # TODO: 完成定义 -------前后续节点
-
-        nodes_pre = Nodes
-        nodes_aft = Nodes
+        nodes_pre = FindPre(node)
+        nodes_aft = FindAft(node)
         return render_template("node_list.html", msg=f"{node.name}的前后续节点", nodes_pre=nodes_pre,nodes_aft=nodes_aft,fenlan=True)
     else:
         score = get_User(eval(node_id)).score
         LearntNodes_id=[i for i in score.keys()]
         Grades=[i for i in score.values()]
-
-        # TODO: 完成定义  -------给我推荐
         result_nodes = Recommend(LearntNodes_id,Grades)
         return render_template("node_list.html", msg="给我推荐", nodes=result_nodes)
 
