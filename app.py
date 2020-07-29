@@ -121,9 +121,41 @@ def verification():
         return "ERR"
 
 
+@app.route('/artlist', methods=["get"])
+def artlist():
+    # TODO: 更改到排序的知识点
+    result_nodes = Nodes
+
+    return render_template("node_list.html", nodes=result_nodes)
+
+
 @app.route("/search", methods=["post", "get"])
 def search():
-    return 0
+    request_str = request.form.get("s")
+
+    # TODO: 完成定义 ---字符串搜索
+    result_nodes = Nodes
+
+    return render_template("node_list.html", msg="字符串搜索", nodes=result_nodes)
+
+
+@app.route("/search_1", methods=["post", "get"])
+def search_1():
+    mode = request.values.get("mode")
+    node_id = request.values.get("id")
+    node = get_Node(eval(node_id))
+
+
+    if mode == "0":
+        # TODO: 完成定义 -------前后续节点
+
+        result_nodes = Nodes
+        return render_template("node_list.html", msg=f"{node.name}的前后续节点", nodes=result_nodes)
+    else:
+        score = eval(request.values.get("score"))
+        # TODO: 完成定义  -------给我推荐
+        result_nodes = Nodes
+        return render_template("node_list.html", msg="给我推荐", nodes=result_nodes)
 
 
 if __name__ == '__main__':

@@ -62,7 +62,7 @@
                 <div class="menu-top-menu-container">
                     <ul id="menu-top-menu" class="clearfix">
                         <li class="current-menu-item"><a href="index.html">Home</a></li>
-                        <li><a href="articles-list.html">Articles List</a></li>
+                        <li><a href="/artlist">Articles List</a></li>
                         <li><a href="faq.html">FAQs</a></li>
                     </ul>
                 </div>
@@ -80,7 +80,8 @@
         <h3 class="search-header">Have a Question?</h3>
         <p class="search-tag-line">If you have any question you can ask below or enter what you are looking for!</p>
 
-        <form id="search-form" class="search-form clearfix" method="get" action="#" autocomplete="off">
+        <form id="search-form" class="search-form clearfix" method="get" action="/search" enctype="multipart/form-data"
+              autocomplete="off">
             <input class="search-term required" type="text" id="s" name="s" placeholder="Type your search terms here"
                    title="* Please enter a search term!"/>
             <input class="search-btn" type="submit" value="Search"/>
@@ -110,6 +111,11 @@
                                             id="{{ node.id }}" type="number" value="{{ node.tmp_score }}">
                                     <input value="Submit" type="button"
                                            onclick="update_score({{ user_id }},{{ node.id }})"></span>
+                                    <span class="article-meta">
+                                        <input value="前后续节点" type="button" onclick="window.location.href='/search_1?id={{ node.id }}&mode=0'">
+                                        &nbsp;&nbsp;&nbsp;
+                                        <input value="给我推荐" type="button" onclick="window.location.href='/search_1?id={{ node.id }}&mode=1&score={{ node.tmp_score }}'">
+                                    </span>
                                 </li>
                             {% endfor %}
                         </ul>
@@ -127,6 +133,11 @@
                                             id="{{ node.id }}" type="number" value="{{ node.tmp_score }}">
                                     <input value="Submit" type="button"
                                            onclick="update_score({{ user_id }},{{ node.id }})"></span>
+                                    <span class="article-meta">
+                                        <input value="前后续节点" type="button" onclick="window.location.href='/search_1?id={{ node.id }}&mode=0'">
+                                        &nbsp;&nbsp;&nbsp;
+                                        <input value="给我推荐" type="button" onclick="window.location.href='/search_1?id={{ node.id }}&mode=1&score={{ node.tmp_score }}'">
+                                    </span>
                                 </li>
                             {% endfor %}
                         </ul>
