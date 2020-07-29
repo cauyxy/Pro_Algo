@@ -5,6 +5,9 @@ from Search.search import Search
 from FindPreAft.FindPre import FindPre
 from FindPreAft.FindAft import FindAft
 from Recommend.recommend import Recommend
+from Zy.Sort_by_level import Sort_by_level
+from Zy.Sort_by_time import Sort_by_time
+from Zy.TopSort import Top_Sort
 
 app = Flask(__name__)
 
@@ -98,11 +101,10 @@ def details():
     nodes = Sort_by_similarity(node)
 
     # TODO： 完成Time，result_nodes
-    '''
-    time,result_nodes = function(node)
-    '''
-    result_nodes = Nodes
-    time = 0
+
+    time,result_nodes = Top_Sort(node)
+    print(time)
+    print(result_nodes)
 
     return render_template("details.html", node=node, sim_nodes=nodes[1:6],nodes = result_nodes,time = time)
 
@@ -139,11 +141,11 @@ def artlist():
     # TODO: 更改到排序的知识点
     if mode=="0":
         # Sort By Time
-        result_nodes = Nodes
+        result_nodes = Sort_by_time()
         msg = "Sort By Time"
     else:
         # Sort By Level
-        result_nodes = Nodes
+        result_nodes = Sort_by_level()
         msg = "Sort By Level"
 
     return render_template("node_list.html", msg=msg,nodes=result_nodes)
