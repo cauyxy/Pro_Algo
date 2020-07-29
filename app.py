@@ -1,13 +1,13 @@
 from flask import Flask, render_template, request
 from models import *
-from Zy.Sort_by_similarity import Sort_by_similarity
+
+from Zy.Sort import *
+
 from Search.search import Search
+from Recommend.recommend import Recommend
+
 from FindPreAft.FindPre import FindPre
 from FindPreAft.FindAft import FindAft
-from Recommend.recommend import Recommend
-from Zy.Sort_by_level import Sort_by_level
-from Zy.Sort_by_time import Sort_by_time
-from Zy.TopSort import Top_Sort
 
 app = Flask(__name__)
 
@@ -100,13 +100,9 @@ def details():
 
     nodes = Sort_by_similarity(node)
 
-    # TODO： 完成Time，result_nodes
+    time, result_nodes = Top_Sort(node)
 
-    time,result_nodes = Top_Sort(node)
-    print(time)
-    print(result_nodes)
-
-    return render_template("details.html", node=node, sim_nodes=nodes[1:6],nodes = result_nodes,time = time)
+    return render_template("details.html", node=node, sim_nodes=nodes[1:6], nodes=result_nodes, time=time)
 
 
 @app.route('/updatescore', methods=["get"])
@@ -138,8 +134,7 @@ def verification():
 def artlist():
     mode = request.values.get("mode")
 
-    # TODO: 更改到排序的知识点
-    if mode=="0":
+    if mode == "0":
         # Sort By Time
         result_nodes = Sort_by_time()
         msg = "Sort By Time"
@@ -148,7 +143,7 @@ def artlist():
         result_nodes = Sort_by_level()
         msg = "Sort By Level"
 
-    return render_template("node_list.html", msg=msg,nodes=result_nodes)
+    return render_template("node_list.html", msg=msg, nodes=result_nodes)
 
 
 @app.route("/search", methods=["post", "get"])
@@ -164,16 +159,16 @@ def search_1():
     node_id = request.values.get("id")
     node = get_Node(eval(node_id))
 
-
     if mode == "0":
         nodes_pre = FindPre(node)
         nodes_aft = FindAft(node)
-        return render_template("node_list.html", msg=f"{node.name}的前后续节点", nodes_pre=nodes_pre,nodes_aft=nodes_aft,fenlan=True)
+        return render_template("node_list.html", msg=f"{node.name}的前后续节点", nodes_pre=nodes_pre, nodes_aft=nodes_aft,
+                               fenlan=True)
     else:
         score = get_User(eval(node_id)).score
-        LearntNodes_id=[i for i in score.keys()]
-        Grades=[i for i in score.values()]
-        result_nodes = Recommend(LearntNodes_id,Grades)
+        LearntNodes_id = [i for i in score.keys()]
+        Grades = [i for i in score.values()]
+        result_nodes = Recommend(LearntNodes_id, Grades)
         return render_template("node_list.html", msg="给我推荐", nodes=result_nodes)
 
 

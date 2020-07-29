@@ -1,7 +1,9 @@
-#coding:utf-8
+# coding:utf-8
 '''
 BM算法
 '''
+
+
 def GetBC(pattern):
     # 坏字符字典
     BCDict = dict()
@@ -9,6 +11,7 @@ def GetBC(pattern):
         # 用字典记录坏字符位置
         BCDict[pattern[i]] = i + 1
     return BCDict
+
 
 def GetGS(pattern):
     # 好后缀字典
@@ -18,7 +21,7 @@ def GetGS(pattern):
     GSDict[''] = 0
 
     for i in range(len(pattern)):
-        #本质上在进行自身与自身的匹配寻找好后缀
+        # 本质上在进行自身与自身的匹配寻找好后缀
 
         # 从右向左寻找好后缀
         GS = pattern[len(pattern) - i - 1:]
@@ -33,7 +36,8 @@ def GetGS(pattern):
                 GSDict[GS] = len(pattern) - j - i - 1
     return GSDict
 
-def BM(input,target):
+
+def BM(input, target):
     input_length = len(input)
     target_length = len(target)
     i = 0
@@ -43,7 +47,7 @@ def BM(input,target):
     BMGS = GetGS(pattern=input)  # 好后缀
     while i < target_length:
         while (j > 0):
-            if i + j -1 >= target_length: #搜索完成返回结果位置
+            if i + j - 1 >= target_length:  # 搜索完成返回结果位置
                 return loaction
 
             # 目标串匹配
@@ -58,7 +62,7 @@ def BM(input,target):
 
             # 匹配失败就滑动
             else:
-                #寻找两个算法的滑动最大值
+                # 寻找两个算法的滑动最大值
                 i = i + max(BMGS.setdefault(input_match[1:], input_length), j - BMBC.setdefault(target[i + j - 1], 0))
                 j = input_length
 

@@ -1,15 +1,17 @@
-#coding:utf-8
+# coding:utf-8
 
 '''
 Levenshtein算法
 动态规划实现
 '''
+
+
 def Levenshtein(input, target):
-    #构建dp二维表
+    # 构建dp二维表
     input_length = len(input)
     target_length = len(target)
     dp = [[0] * (target_length + 1) for _ in range(input_length + 1)]
-    #二维表初始化
+    # 二维表初始化
     # 第一列
     for i in range(1, input_length + 1):
         dp[i][0] = dp[i - 1][0] + 1
@@ -23,5 +25,5 @@ def Levenshtein(input, target):
                 dp[i][j] = dp[i - 1][j - 1]
             else:
                 dp[i][j] = min(dp[i][j - 1], dp[i - 1][j], dp[i - 1][j - 1]) + 1
-    #+2是为了区分完全匹配字符串的结果
+    # +2是为了区分完全匹配字符串的结果
     return dp[-1][-1]

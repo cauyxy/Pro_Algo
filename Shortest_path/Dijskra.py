@@ -1,5 +1,3 @@
-from models import *
-
 ###Dijskra算法
 
 inf = float('inf')
@@ -25,9 +23,9 @@ def Dijsktra(e, i):
             new_dis = min_dis + e[min_index][key]
             if dis[key] > new_dis:
                 dis[key] = new_dis
-        list_dis=[0 for _ in range(20)]
+        list_dis = [0 for _ in range(20)]
         for key in dis:
-            list_dis[key]=dis[key]
+            list_dis[key] = dis[key]
     return list_dis
 
 
