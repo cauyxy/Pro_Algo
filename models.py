@@ -13,6 +13,7 @@ class Node:
         self.level = level
         self.time = time
         self.desc = desc
+        self.tmp_score = 0
         self.pre_list = []
         self.aft_list = []
 
@@ -39,9 +40,10 @@ class User:
         self.password = password
         self.learned = []
         self.score = {}
+        for i in range(1,21):
+            self.score[i] = 0
 
     def add(self, node_id, score):
-        self.learned.append(node_id)
         self.score[node_id] = score
 
 

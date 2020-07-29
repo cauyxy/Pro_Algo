@@ -107,8 +107,9 @@
                                     <h4><a href="/details?id={{ node.id }}&user_id={{ user_id }}">{{ node.name }}</a>
                                     </h4>
                                     <span class="article-meta"><label for="{{ node.id }}">Score: </label><input
-                                            id="{{ node.id }}" type="number">
-                                    <input value="Submit" type="button" onclick="update_score({{ user_id }},{{ node.id }})"></span>
+                                            id="{{ node.id }}" type="number" value="{{ node.tmp_score }}">
+                                    <input value="Submit" type="button"
+                                           onclick="update_score({{ user_id }},{{ node.id }})"></span>
                                 </li>
                             {% endfor %}
                         </ul>
@@ -123,8 +124,9 @@
                                     <h4><a href="/details?id={{ node.id }}&user_id={{ user_id }}">{{ node.name }}</a>
                                     </h4>
                                     <span class="article-meta"><label for="{{ node.id }}">Score: </label><input
-                                            id="{{ node.id }}" type="number">
-                                    <input value="Submit" type="button" onclick="update_score({{ user_id }},{{ node.id }})"></span>
+                                            id="{{ node.id }}" type="number" value="{{ node.tmp_score }}">
+                                    <input value="Submit" type="button"
+                                           onclick="update_score({{ user_id }},{{ node.id }})"></span>
                                 </li>
                             {% endfor %}
                         </ul>

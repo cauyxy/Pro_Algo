@@ -36,7 +36,7 @@ def user_match(email):
 def login_match(email, password):
     for user in Users:
         if email == user.email and password == user.password:
-            return user.id
+            return user
     return False
 
 
@@ -49,10 +49,14 @@ def login():
         email = request.form.get("email")
         password = request.form.get("password")
 
-        user_id = login_match(email, password)
+        user = login_match(email, password)
 
-        if user_id:
-            return render_template("index.html", user_id=user_id, nodes_part1=Nodes[:10], nodes_part2=Nodes[10:])
+        for node in Nodes:
+            node.tmp_score = user.score[node.id]
+
+        if user:
+            return render_template("index.html", user_id=user.id, nodes_part1=Nodes[:10],
+                                   nodes_part2=Nodes[10:])
         else:
             return render_template("login.html", err="Illegal Login")
 
@@ -64,7 +68,6 @@ def register(next_id=next_id):
     else:
         email = request.form.get("email")
         password = request.form.get("password")
-
 
         if user_match(email):
             return render_template("register.html", err="This email have registered")
@@ -88,10 +91,9 @@ def details():
     node_id = request.values.get("id")
     node = get_Node(eval(node_id))
 
+    nodes = Sort_by_similarity(node)
 
-    nodes=Sort_by_similarity(node)
-
-    return render_template("details.html", node=node,sim_nodes=nodes[1:6])
+    return render_template("details.html", node=node, sim_nodes=nodes[1:6])
 
 
 @app.route('/updatescore', methods=["get"])
@@ -100,7 +102,7 @@ def updatescore():
     node_id = request.values.get("id")
     score = request.values.get("score")
     user = get_User(eval(user_id))
-    user.add(node_id, score)
+    user.add(eval(node_id), score)
     dump2file("user.dat", Users)
 
     return "Ok"
@@ -117,6 +119,11 @@ def verification():
         return "Ok"
     else:
         return "ERR"
+
+
+@app.route("/search", methods=["post", "get"])
+def search():
+    return 0
 
 
 if __name__ == '__main__':
