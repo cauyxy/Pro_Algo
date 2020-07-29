@@ -1,6 +1,6 @@
 from models import load2prog
 def GetNode(id):
-    nodes = load2prog("./data.dat")
+    nodes = load2prog("../data.dat")
     for node in nodes:
         if id==node.id:
             return node

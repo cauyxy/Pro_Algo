@@ -6,7 +6,7 @@ from pypinyin import lazy_pinyin
 from models import load2prog
 
 def GetNode(id):
-    nodes = load2prog("../data.dat")
+    nodes = load2prog("./data.dat")
     for node in nodes:
         if id==node.id:
             return node
@@ -26,7 +26,7 @@ def SelectAlogrithm(input,target):
 def Search(input):
     ResNodes={x:100 for x in range(1,21)}
     SearchRes = []
-    nodes = load2prog("../data.dat")
+    nodes = load2prog("./data.dat")
 
     for node in nodes:
         # 完全匹配搜索

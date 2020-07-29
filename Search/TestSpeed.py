@@ -13,14 +13,14 @@ def GetRandomStr(length):
 
 def CreateTestFile():
     target = GetRandomStr(100000000)
-    file = open('TestStr.txt', 'w')
+    file = open('TestSpeedStr.txt', 'w')
     file.flush()
     file.write(target)
     os.fsync(file)
     file.close()
 
 def ReadTestFile():
-    file = open('TestStr.txt', 'r')
+    file = open('TestSpeedStr.txt', 'r')
     file.flush()
     target=file.read()
     os.fsync(file)
@@ -29,7 +29,7 @@ def ReadTestFile():
 
 def Test():
     target=ReadTestFile()
-    file = open('TestRes.txt', 'w+')
+    file = open('TestSpeedRes.txt', 'w+')
     file.write("字符串长度:"+str(len(target)))
     file.write('\r\n')
     TestAlogrithm = [BF, KMP, BM]
