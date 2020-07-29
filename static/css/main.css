@@ -235,6 +235,18 @@ form.search-form input.search-btn {
     color: #fff;
 }
 
+
+input.rec-btn {
+    align-items: center;
+    background-color: #3f4b55;
+    font-size: 14px;
+    line-height: 19px;
+    font-weight: 600;
+    padding: 14px 30px 15px;
+    color: #fff;
+    text-align: center;
+}
+
 form.search-form input.search-btn:hover {
     background-color: #4b5760;
 }

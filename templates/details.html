@@ -6,7 +6,7 @@
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Knowledge Base Theme</title>
+    <title>Knowledge Base</title>
 
     <link rel="shortcut icon" href="../static/images/favicon.png"/>
 
@@ -37,7 +37,6 @@
                 <a href="index.html" title="Knowledge Base Theme">
                     <img src="../static/images/logo.png" alt="Knowledge Base Theme">
                 </a>
-                <span class="tag-line">Premium WordPress Theme</span>
             </div>
 
 
@@ -45,13 +44,12 @@
             <nav class="main-nav">
                 <div class="menu-top-menu-container">
                     <ul id="menu-top-menu" class="clearfix">
-                        <li><a href="#">Articles List</a>
+                        <li><a href="#">Knowledge List</a>
                             <ul class="sub-menu" style="display: none;">
                                 <li><a href="/artlist?mode=0">Sort By Time</a></li>
                                 <li><a href="/artlist?mode=1">Sort By Level</a></li>
                             </ul>
                         </li>
-                        <li><a href="faq.html">FAQs</a></li>
 
                     </ul>
                 </div>
@@ -87,23 +85,9 @@
             <!-- start of page content -->
             <div class="span8 page-content">
 
-                <ul class="breadcrumb">
-                    <li><a href="#">Knowledge Base Theme</a><span class="divider">/</span></li>
-                    <li><a href="#" title="View all posts in Server &amp; Database">Server &amp; Database</a> <span
-                            class="divider">/</span></li>
-                    <li class="active">Integrating WordPress with Your Website</li>
-                </ul>
-
                 <article class=" type-post format-standard hentry clearfix">
 
                     <h1 class="post-title"><a href="#">{{ node.name }}</a></h1>
-
-                    <div class="post-meta clearfix">
-                        <span class="date">25 Feb, 2013</span>
-                        <span class="category"><a href="#" title="View all posts in Server &amp; Database">Server &amp; Database</a></span>
-                        <span class="comments"><a href="#" title="Comment on Integrating WordPress with Your Website">3 Comments</a></span>
-                        <span class="like-count">66</span>
-                    </div><!-- end of post meta -->
 
                     {{ node.desc }}
                 </article>
@@ -136,23 +120,11 @@
             <aside class="span4 page-sidebar">
 
                 <section class="widget">
-                    <div class="support-widget">
-                        <h3 class="title">Support</h3>
-                        <p class="intro">Need more support? If you did not found an answer, contact us for further
-                            help.</p>
-                    </div>
-                </section>
-
-
-                <section class="widget">
                     <h3 class="title">Similar Points</h3>
                     <ul class="articles">
                         {% for node in sim_nodes %}
                             <li class="article-entry standard">
                                 <h4><a href="/details?id={{ node.id }}">{{ node.name }}</a></h4>
-                                <span class="article-meta">25 Feb, 2013 in <a href="#"
-                                                                              title="View all posts in Server &amp; Database">Server &amp; Database</a></span>
-                                <span class="like-count">66</span>
                             </li>
                         {% endfor %}
                     </ul>
@@ -165,51 +137,6 @@
     </div>
 </div>
 <!-- End of Page Container -->
-
-<!-- Start of Footer -->
-<footer id="footer-wrapper">
-    <div id="footer" class="container">
-        <div class="row">
-
-            <div class="span3">
-                <section class="widget">
-                    <h3 class="title">How it works</h3>
-                    <div class="textwidget">
-                        Nothing to show
-                    </div>
-                </section>
-            </div>
-
-            <div class="span3">
-                <section class="widget"><h3 class="title">Categories</h3>
-                    <ul>
-                        <li><a href="#" title="Lorem ipsum dolor sit amet,">Advanced Techniques</a></li>
-                        <li><a href="#" title="Lorem ipsum dolor sit amet,">Designing in WordPress</a></li>
-                        <li><a href="#" title="Lorem ipsum dolor sit amet,">Server &amp; Database</a></li>
-                        <li><a href="#" title="Lorem ipsum dolor sit amet, ">Theme Development</a></li>
-                        <li><a href="#" title="Lorem ipsum dolor sit amet,">Website Dev</a></li>
-                        <li><a href="#" title="Lorem ipsum dolor sit amet,">WordPress for Beginners</a></li>
-                        <li><a href="#" title="Lorem ipsum dolor sit amet, ">WordPress Plugins</a></li>
-                    </ul>
-                </section>
-            </div>
-
-            <div class="span3">
-                <section class="widget">
-                    <h3 class="title">Latest Masages</h3>
-                    <div id="twitter_update_list">
-                        <ul>
-                            <li>No Tweets loaded !</li>
-                        </ul>
-                    </div>
-                </section>
-            </div>
-
-        </div>
-    </div>
-    <!-- end of #footer -->
-
-</footer>
 
 <!-- script -->
 <script type='text/javascript' src='../static/js/jquery-1.8.3.min.js'></script>

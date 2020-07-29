@@ -1,21 +1,13 @@
-<!doctype html>
-<!--[if lt IE 7]>
-<html class="lt-ie9 lt-ie8 lt-ie7" lang="en-US"> <![endif]-->
-<!--[if IE 7]>
-<html class="lt-ie9 lt-ie8" lang="en-US"> <![endif]-->
-<!--[if IE 8]>
-<html class="lt-ie9" lang="en-US"> <![endif]-->
-<!--[if gt IE 8]><!-->
-<html lang="en-US"> <!--<![endif]-->
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <!-- META TAGS -->
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Knowledge Base Theme</title>
+    <title>Knowledge Base</title>
 
     <link rel="shortcut icon" href="../static/images/favicon.png"/>
-
 
     <!-- Style Sheet-->
     <link rel='stylesheet' id='bootstrap-css-css' href='../static/css/bootstrap.css?ver=1.0' type='text/css'
@@ -40,11 +32,9 @@
 
 
             <div class="logo-container">
-                <!-- Website Logo -->
-                <a href="index-2.html" title="Knowledge Base Theme">
-                    <img src="images/logo.png" alt="Knowledge Base Theme">
+                <a href="index.html" title="Knowledge Base Theme">
+                    <img src="../static/images/logo.png" alt="Knowledge Base Theme">
                 </a>
-                <span class="tag-line">Premium WordPress Theme</span>
             </div>
 
 
@@ -52,14 +42,13 @@
             <nav class="main-nav">
                 <div class="menu-top-menu-container">
                     <ul id="menu-top-menu" class="clearfix">
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="#">Articles List</a>
+                        <li><a href="#">Knowledge List</a>
                             <ul class="sub-menu" style="display: none;">
                                 <li><a href="/artlist?mode=0">Sort By Time</a></li>
                                 <li><a href="/artlist?mode=1">Sort By Level</a></li>
                             </ul>
                         </li>
-                        <li><a href="faq.html">FAQs</a></li>
+
                     </ul>
                 </div>
             </nav>
@@ -91,7 +80,6 @@
     <div class="container">
         <h2>{{ msg }}</h2>
 
-
         {% if fenlan %}
             <section class="span4 articles-list">
                 <h4>前序节点</h4>
@@ -104,13 +92,11 @@
                         </li>
                     {% endfor %}
                 </ul>
-
             </section>
 
 
             <section class="span4 articles-list">
                 <h4>后序节点</h4>
-
                 <ul class="articles">
                     {% for node in nodes_aft %}
                         <li class="article-entry standard">
@@ -119,7 +105,6 @@
                         </li>
                     {% endfor %}
                 </ul>
-
             </section>
         {% endif %}
 
@@ -128,122 +113,21 @@
             <!-- start of page content -->
             <div class="span8 main-listing">
 
-
                 {% for node in nodes %}
                     <article class="format-standard type-post hentry clearfix">
-
                         <header class="clearfix">
-
                             <h3 class="post-title">
                                 <a href="/details?id={{ node.id }}&user_id={{ user_id }}">{{ node.name }}</a>
                             </h3>
                         </header>
-
                     </article>
                 {% endfor %}
+
             </div>
-
-
-            <!-- start of sidebar -->
-            <aside class="span4 page-sidebar">
-
-                <section class="widget">
-                    <div class="support-widget">
-                        <h3 class="title">Support</h3>
-                        <p class="intro">Need more support? If you did not found an answer, contact us for further
-                            help.</p>
-                    </div>
-                </section>
-
-
-                <section class="widget"><h3 class="title">Categories</h3>
-                    <ul>
-                        <li><a href="#" title="Lorem ipsum dolor sit amet,">Advanced Techniques</a></li>
-                        <li><a href="#" title="Lorem ipsum dolor sit amet,">Designing in WordPress</a></li>
-                    </ul>
-                </section>
-
-                <section class="widget">
-                    <h3 class="title">Recent Comments</h3>
-
-                </section>
-
-            </aside>
-            <!-- end of sidebar -->
         </div>
     </div>
 </div>
 <!-- End of Page Container -->
-
-<!-- Start of Footer -->
-<footer id="footer-wrapper">
-    <div id="footer" class="container">
-        <div class="row">
-
-            <div class="span3">
-                <section class="widget">
-                    <h3 class="title">How it works</h3>
-
-                </section>
-            </div>
-
-            <div class="span3">
-                <section class="widget"><h3 class="title">Categories</h3>
-                    <ul>
-                        <li><a href="#" title="Lorem ipsum dolor sit amet,">Advanced Techniques</a></li>
-                    </ul>
-                </section>
-            </div>
-
-            <div class="span3">
-                <section class="widget">
-                    <h3 class="title">Latest Tweets</h3>
-                    <div id="twitter_update_list">
-                        <ul>
-                            <li>No Tweets loaded !</li>
-                        </ul>
-                    </div>
-
-                </section>
-            </div>
-
-            <div class="span3">
-                <section class="widget">
-                    <h3 class="title">Flickr Photos</h3>
-                    <div class="flickr-photos" id="basicuse">
-                    </div>
-                </section>
-            </div>
-
-        </div>
-    </div>
-    <!-- end of #footer -->
-
-    <!-- Footer Bottom -->
-    <div id="footer-bottom-wrapper">
-        <div id="footer-bottom" class="container">
-            <div class="row">
-                <div class="span6">
-                    <!-- Social Navigation -->
-                    <ul class="social-nav clearfix">
-                        <li class="linkedin"><a target="_blank" href="#"></a></li>
-                        <li class="stumble"><a target="_blank" href="#"></a></li>
-                        <li class="google"><a target="_blank" href="#"></a></li>
-                        <li class="deviantart"><a target="_blank" href="#"></a></li>
-                        <li class="flickr"><a target="_blank" href="#"></a></li>
-                        <li class="skype"><a target="_blank" href="skype:#?call"></a></li>
-                        <li class="rss"><a target="_blank" href="#"></a></li>
-                        <li class="twitter"><a target="_blank" href="#"></a></li>
-                        <li class="facebook"><a target="_blank" href="#"></a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- End of Footer Bottom -->
-
-</footer>
-<!-- End of Footer -->
 
 <!-- script -->
 <script type='text/javascript' src='../static/js/jquery-1.8.3.min.js'></script>

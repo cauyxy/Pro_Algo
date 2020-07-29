@@ -5,7 +5,7 @@
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Knowledge Base Theme</title>
+    <title>Knowledge Base</title>
 
     <link rel="shortcut icon" href="../static/images/favicon.png"/>
 
@@ -53,7 +53,6 @@
                 <a href="index.html" title="Knowledge Base Theme">
                     <img src="../static/images/logo.png" alt="Knowledge Base Theme">
                 </a>
-                <span class="tag-line">Premium WordPress Theme</span>
             </div>
 
 
@@ -61,16 +60,13 @@
             <nav class="main-nav">
                 <div class="menu-top-menu-container">
                     <ul id="menu-top-menu" class="clearfix">
-                        <li class="current-menu-item"><a href="index.html">Home</a></li>
-
-                        <li><a href="#">Articles List</a>
+                        <li><a href="#">Knowledge List</a>
                             <ul class="sub-menu" style="display: none;">
                                 <li><a href="/artlist?mode=0">Sort By Time</a></li>
                                 <li><a href="/artlist?mode=1">Sort By Level</a></li>
                             </ul>
                         </li>
 
-                        <li><a href="faq.html">FAQs</a></li>
                     </ul>
                 </div>
             </nav>
@@ -83,9 +79,10 @@
 
 <!-- Start of Search Wrapper -->
 <div class="search-area-wrapper">
-    <div class="search-area container">
+    <center class="search-area container">
         <h3 class="search-header">Have a Question?</h3>
         <p class="search-tag-line">If you have any question you can ask below or enter what you are looking for!</p>
+
 
         <form id="search-form" class="search-form clearfix" method="get" action="/search" enctype="multipart/form-data"
               autocomplete="off">
@@ -94,7 +91,13 @@
             <input class="search-btn" type="submit" value="Search"/>
             <div id="search-error-container"></div>
         </form>
-    </div>
+
+        <br>
+
+        <div style="text-align: center;">
+            <input class="rec-btn" value="给我推荐" type="button"
+                   onclick="window.location.href='/search_1?id={{ user_id }}&mode=1'">
+        </div>
 </div>
 <!-- End of Search Wrapper -->
 
@@ -104,14 +107,12 @@
         <div class="row">
 
 
-            <input value="给我推荐" type="button" onclick="window.location.href='/search_1?id={{ user_id }}&mode=1'">
-
             <!-- start of page content -->
             <div class="span8 page-content">
                 <!-- Basic Home Page Template -->
                 <div class="row separator">
                     <section class="span4 articles-list">
-                        <h3>Featured Articles</h3>
+                        <h3>Knowledge List</h3>
                         <ul class="articles">
                             {% for node in nodes_part1 %}
                                 <li class="article-entry standard">
@@ -122,7 +123,8 @@
                                     <input value="Submit" type="button"
                                            onclick="update_score({{ user_id }},{{ node.id }})"></span>
                                     <span class="article-meta">
-                                        <input value="前后续节点" type="button" onclick="window.location.href='/search_1?id={{ node.id }}&mode=0'">
+                                        <input value="前后续节点" type="button"
+                                               onclick="window.location.href='/search_1?id={{ node.id }}&mode=0'">
                                     </span>
                                 </li>
                             {% endfor %}
@@ -131,7 +133,6 @@
 
 
                     <section class="span4 articles-list">
-                        <h3>Latest Articles</h3>
                         <ul class="articles">
                             {% for node in nodes_part2 %}
                                 <li class="article-entry standard">
@@ -142,7 +143,8 @@
                                     <input value="Submit" type="button"
                                            onclick="update_score({{ user_id }},{{ node.id }})"></span>
                                     <span class="article-meta">
-                                        <input value="前后续节点" type="button" onclick="window.location.href='/search_1?id={{ node.id }}&mode=0'">
+                                        <input value="前后续节点" type="button"
+                                               onclick="window.location.href='/search_1?id={{ node.id }}&mode=0'">
                                     </span>
                                 </li>
                             {% endfor %}
@@ -155,57 +157,6 @@
     </div>
 </div>
 <!-- End of Page Container -->
-
-<!-- Start of Footer -->
-<footer id="footer-wrapper">
-    <div id="footer" class="container">
-        <div class="row">
-
-            <div class="span3">
-                <section class="widget">
-                    <h3 class="title">How it works</h3>
-                    <div class="textwidget">
-                        填充部分
-                    </div>
-                </section>
-            </div>
-
-
-            <div class="span3">
-                <section class="widget"><h3 class="title">Categories</h3>
-                    <ul>
-                        <li><a href="#" title="Lorem ipsum dolor sit amet,">Advanced Techniques</a></li>
-                        <li><a href="#" title="Lorem ipsum dolor sit amet,">Designing in WordPress</a></li>
-                        <li><a href="#" title="Lorem ipsum dolor sit amet,">Server &amp; Database</a></li>
-                        <li><a href="#" title="Lorem ipsum dolor sit amet, ">Theme Development</a></li>
-                        <li><a href="#" title="Lorem ipsum dolor sit amet,">Website Dev</a></li>
-                        <li><a href="#" title="Lorem ipsum dolor sit amet,">WordPress for Beginners</a></li>
-                        <li><a href="#" title="Lorem ipsum dolor sit amet, ">WordPress Plugins</a></li>
-                    </ul>
-                </section>
-            </div>
-
-
-            <div class="span3">
-                <section class="widget">
-                    <h3 class="title">Latest Messages</h3>
-                    <div id="twitter_update_list">
-                        <ul>
-                            <li>No Tweets loaded !</li>
-                        </ul>
-                    </div>
-
-                </section>
-            </div>
-
-
-        </div>
-    </div>
-    <!-- end of #footer -->
-
-</footer>
-<!-- End of Footer -->
-
 
 <!-- script -->
 <script type='text/javascript' src='../static/js/jquery-1.8.3.min.js'></script>
