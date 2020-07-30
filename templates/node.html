@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>ADD NODE</title>
+    <title>{{ msg }}</title>
     <link rel="stylesheet" href="https://unpkg.com/mobi.css/dist/mobi.min.css">
 </head>
 <body>
@@ -11,15 +11,14 @@
     <div class="container">
         <div class="flex-center">
             <div class="unit-1-2 unit-1-on-mobile">
-                <h3>ADD NODE</h3>
-                <form class="form" action="/add_node?user_id={{ user_id }}" method="post" enctype="multipart/form-data">
-                    <label for="name">Name:</label><input id="name" name="name" type="text">
+                <h3>{{ msg }}</h3>
+                <form class="form" action="/{{ op }}?user_id={{ user_id }}&id={{ my_node.id }}" method="post" enctype="multipart/form-data">
+                    <label for="name">Name:</label><input id="name" name="name" type="text" value="{{ my_node.name }}">
 
-                    <label for="level">Level:</label><input id="level" name="level" type="number" required>
-                    <label for="cate">Cate:</label><input id="cate" name="cate" type="number" required>
-                    <label for="time">Time:</label><input id="time" name="time" type="number" required>
-                    <label for="desc">Description:</label><input id="desc" name="desc" type="text" required
-                                                          placeholder="请输入该知识点的描述">
+                    <label for="level">Level:</label><input id="level" name="level" type="number" value="{{ my_node.level }}" required>
+                    <label for="cate">Cate:</label><input id="cate" name="cate" type="number" value="{{ my_node.cate }}" required>
+                    <label for="time">Time:</label><input id="time" name="time" type="number" value="{{ my_node.time }}" required>
+                    <label for="desc">Description:</label><input id="desc" name="desc" type="text" value="{{ my_node.desc }}" required>
 
                     <div style="margin:0;padding: 0;position:relative;margin-left: auto;margin-right: auto;">
 
@@ -43,7 +42,7 @@
 
                     </div>
 
-                    <button type="submit" class="btn btn-primary btn-block">ADD</button>
+                    <button type="submit" class="btn btn-primary btn-block">Submit</button>
                 </form>
 
             </div>

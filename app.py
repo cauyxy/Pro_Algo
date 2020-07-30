@@ -67,6 +67,10 @@ def login():
         else:
             return render_template("login.html", err="Illegal Login")
 
+@app.route('/index', methods=["get", "post"])
+def index():
+    return render_template("index.html", user_id=request.values.get("user_id"), nodes_part1=Nodes[:int(len(Nodes) / 2)],
+                           nodes_part2=Nodes[int(len(Nodes) / 2):])
 
 @app.route('/register', methods=["get", "post"])
 def register(next_id=next_id):
@@ -176,7 +180,7 @@ def search_1():
 def add_node():
     user_id = request.values.get("user_id")
     if request.method == "GET":
-        return render_template("add_node.html", user_id=user_id, Nodes=Nodes)
+        return render_template("node.html", msg="ADD NODE", user_id=user_id, Nodes=Nodes, op="add_node")
 
 
     else:
@@ -210,5 +214,46 @@ def add_node():
                                nodes_part2=Nodes[int(len(Nodes) / 2):])
 
 
+@app.route("/del_item", methods=["post", "get"])
+def del_item():
+    user_id = request.values.get("user_id")
+    id = eval(request.values.get("id"))
+    node = get_Node(id)
+    Nodes.pop(Nodes.index(node))
+    dump2file("data.dat", Nodes)
+
+    return render_template("index.html", user_id=user_id, nodes_part1=Nodes[:int(len(Nodes) / 2)],
+                           alert_msg=f"删除{node.name}节点成功！",
+                           nodes_part2=Nodes[int(len(Nodes) / 2):])
+
+
+@app.route("/edit_item", methods=["post", "get"])
+def edit_item():
+    user_id = request.values.get("user_id")
+    id = eval(request.values.get("id"))
+    node = get_Node(id)
+
+    if request.method == "GET":
+        return render_template("node.html", msg="EDIT NODE", user_id=user_id, my_node=node, op="edit_item")
+    else:
+        name = request.form.get("name")
+        level = eval(request.form.get("level"))
+        cate = eval(request.form.get("cate"))
+        time = eval(request.form.get("time"))
+        desc = request.form.get("desc")
+
+        tmp_node = Node(id, name, cate, level, time, desc)
+        tmp_node.pre_list = node.pre_list
+        tmp_node.aft_list = node.aft_list
+        tmp_index = Nodes.index(node)
+        Nodes.pop(tmp_index)
+        Nodes.insert(tmp_index,tmp_node)
+        dump2file("data.dat", Nodes)
+
+        return render_template("index.html", user_id=user_id, nodes_part1=Nodes[:int(len(Nodes) / 2)],
+                               alert_msg=f"编辑{node.name}节点成功！",
+                               nodes_part2=Nodes[int(len(Nodes) / 2):])
+
+
 if __name__ == '__main__':
-    app.run(port=8887)
+    app.run(port=8887, host="0.0.0.0")
