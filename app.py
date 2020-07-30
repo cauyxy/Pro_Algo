@@ -62,8 +62,8 @@ def login():
             node.tmp_score = user.score[node.id]
 
         if user:
-            return render_template("index.html", user_id=user.id, nodes_part1=Nodes[:10],
-                                   nodes_part2=Nodes[10:])
+            return render_template("index.html", user_id=user.id, nodes_part1=Nodes[:int(len(Nodes) / 2)],
+                                   nodes_part2=Nodes[int(len(Nodes) / 2):])
         else:
             return render_template("login.html", err="Illegal Login")
 
@@ -170,6 +170,44 @@ def search_1():
         Grades = [i for i in score.values()]
         result_nodes = Recommend(LearntNodes_id, Grades)
         return render_template("node_list.html", msg="给我推荐", nodes=result_nodes)
+
+
+@app.route("/add_node", methods=["post", "get"])
+def add_node():
+    user_id = request.values.get("user_id")
+    if request.method == "GET":
+        return render_template("add_node.html", user_id=user_id, Nodes=Nodes)
+
+
+    else:
+        id = len(Nodes) + 1
+        name = request.form.get("name")
+        level = eval(request.form.get("level"))
+        cate = eval(request.form.get("cate"))
+        time = eval(request.form.get("time"))
+        desc = request.form.get("desc")
+        pre_list = request.form.getlist("pre_list")
+        aft_list = request.form.getlist("aft_list")
+        pre_list = [eval(_) for _ in pre_list]
+        aft_list = [eval(_) for _ in aft_list]
+        pre_list = [get_Node(n_id) for n_id in pre_list]
+        aft_list = [get_Node(n_id) for n_id in aft_list]
+
+        tmp_node = Node(id, name, cate, level, time, desc)
+        tmp_node.pre_list = pre_list
+        tmp_node.aft_list = aft_list
+
+        for node in tmp_node.pre_list:
+            node.aft_list.append(tmp_node)
+        for node in tmp_node.aft_list:
+            node.pre_list.append(tmp_node)
+
+        Nodes.append(tmp_node)
+
+        dump2file("data.dat", Nodes)
+
+        return render_template("index.html", user_id=user_id, nodes_part1=Nodes[:int(len(Nodes) / 2)],
+                               nodes_part2=Nodes[int(len(Nodes) / 2):])
 
 
 if __name__ == '__main__':

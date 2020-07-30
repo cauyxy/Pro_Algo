@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>ADD NODE</title>
+    <link rel="stylesheet" href="https://unpkg.com/mobi.css/dist/mobi.min.css">
+</head>
+<body>
+<div class="flex-center">
+    <div class="container">
+        <div class="flex-center">
+            <div class="unit-1-2 unit-1-on-mobile">
+                <h3>ADD NODE</h3>
+                <form class="form" action="/add_node?user_id={{ user_id }}" method="post" enctype="multipart/form-data">
+                    <label for="name">Name:</label><input id="name" name="name" type="text">
+
+                    <label for="level">Level:</label><input id="level" name="level" type="number" required>
+                    <label for="cate">Cate:</label><input id="cate" name="cate" type="number" required>
+                    <label for="time">Time:</label><input id="time" name="time" type="number" required>
+                    <label for="desc">Description:</label><input id="desc" name="desc" type="text" required
+                                                          placeholder="请输入该知识点的描述">
+
+                    <div style="margin:0;padding: 0;position:relative;margin-left: auto;margin-right: auto;">
+
+                        <div style="float: left;">
+                            <h4 style="text-align: center"> 前序知识点</h4>
+                            {% for node in Nodes %}
+                                <label>
+                                    <input type="checkbox" name="pre_list" value="{{ node.id }}"> {{ node.name }}
+                                </label>
+                            {% endfor %}
+                        </div>
+
+                        <div style="float: right;">
+                            <h4 style="text-align: center">后序知识点</h4>
+                            {% for node in Nodes %}
+                                <label>
+                                    <input type="checkbox" name="aft_list" value="{{ node.id }}"> {{ node.name }}
+                                </label>
+                            {% endfor %}
+                        </div>
+
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-block">ADD</button>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
