@@ -67,10 +67,12 @@ def login():
         else:
             return render_template("login.html", err="Illegal Login")
 
+
 @app.route('/index', methods=["get", "post"])
 def index():
     return render_template("index.html", user_id=request.values.get("user_id"), nodes_part1=Nodes[:int(len(Nodes) / 2)],
                            nodes_part2=Nodes[int(len(Nodes) / 2):])
+
 
 @app.route('/register', methods=["get", "post"])
 def register(next_id=next_id):
@@ -180,8 +182,9 @@ def search_1():
 def add_node():
     user_id = request.values.get("user_id")
     if request.method == "GET":
-        return render_template("node.html", msg="ADD NODE", user_id=user_id, Nodes=Nodes, op="add_node")
-
+        tmp_node = Node(0, 0, 0, 0, 0, 0)
+        return render_template("node.html", msg="ADD NODE", user_id=user_id, Nodes=Nodes, op="add_node",
+                               my_node=tmp_node)
 
     else:
         id = len(Nodes) + 1
@@ -247,7 +250,7 @@ def edit_item():
         tmp_node.aft_list = node.aft_list
         tmp_index = Nodes.index(node)
         Nodes.pop(tmp_index)
-        Nodes.insert(tmp_index,tmp_node)
+        Nodes.insert(tmp_index, tmp_node)
         dump2file("data.dat", Nodes)
 
         return render_template("index.html", user_id=user_id, nodes_part1=Nodes[:int(len(Nodes) / 2)],
