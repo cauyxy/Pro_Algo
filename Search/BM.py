@@ -12,7 +12,6 @@ def GetBC(pattern):
         BCDict[pattern[i]] = i + 1
     return BCDict
 
-
 def GetGS(pattern):
     # 好后缀字典
     GSDict = dict()
