@@ -209,6 +209,9 @@ def add_node():
         for node in tmp_node.aft_list:
             node.pre_list.append(tmp_node)
 
+        for user in Users:
+            user.score[id] = 0
+        dump2file("user.dat", Users)
         Nodes.append(tmp_node)
 
         dump2file("data.dat", Nodes)
@@ -223,6 +226,9 @@ def del_item():
     id = eval(request.values.get("id"))
     node = get_Node(id)
     Nodes.pop(Nodes.index(node))
+    for user in Users:
+        user.score.pop(id)
+    dump2file("user.dat", Users)
     dump2file("data.dat", Nodes)
 
     return render_template("index.html", user_id=user_id, nodes_part1=Nodes[:int(len(Nodes) / 2)],
