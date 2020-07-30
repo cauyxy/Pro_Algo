@@ -20,6 +20,7 @@
                     <label for="time">Time:</label><input id="time" name="time" type="number" value="{{ my_node.time }}" required>
                     <label for="desc">Description:</label><input id="desc" name="desc" type="text" value="{{ my_node.desc }}" required>
 
+                {% if Nodes %}
                     <div style="margin:0;padding: 0;position:relative;margin-left: auto;margin-right: auto;">
 
                         <div style="float: left;">
@@ -41,6 +42,7 @@
                         </div>
 
                     </div>
+                {% endif %}
 
                     <button type="submit" class="btn btn-primary btn-block">Submit</button>
                 </form>
