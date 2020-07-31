@@ -1,8 +1,8 @@
 import models
 from FindPreAft.FindPre import FindPre
-from Shortest_path.Dijskra import Dijsktra
 from Sort.QuickSort import QuickSort
 from Sort.TopSort import TopSort
+from Shortest_path.Dijkstra_heap import heap_Dijsktra
 from cmps import *
 
 
@@ -15,7 +15,7 @@ def Sort_by_level():
 def Sort_by_similarity(node):
     nodes = models.load2prog('data.dat')
     edgs = models.To_Graph()
-    dis = Dijsktra(edgs, node.id - 1)
+    dis = heap_Dijsktra(edgs, node.id - 1)
     sorted_nodes = QuickSort(nodes, cmp3, dis=dis)
     return sorted_nodes
 
