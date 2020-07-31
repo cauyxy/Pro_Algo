@@ -29,7 +29,7 @@ def IsLearnable(LearntLevel, AftLevel, Grade):
 
 def Count(LearntNodes_id, Grades):
     # 统计推荐节点记录次数，进行推荐排序
-    CountList = {x: 0 for x in range(1, 21)}
+    CountList = {x: 0 for x in range(1, 100)}
     for i in range(len(LearntNodes_id)):
         LearntNode = GetNode(LearntNodes_id[i])
         for AftNode in LearntNode.aft_list:

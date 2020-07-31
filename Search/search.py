@@ -41,7 +41,7 @@ def Search(input):
                 SelectRes = SelectAlogrithm(GetPinYin(input), GetPinYin(MatchTarget[i]))
                 SelectRes += 1
             if i == 1 and SelectRes != 100:
-                SelectRes += 1
+                SelectRes += 2
             ResNodes[node.id] = min(ResNodes[node.id], SelectRes)
 
         input_word, input_pinyin = CutWord(input)
