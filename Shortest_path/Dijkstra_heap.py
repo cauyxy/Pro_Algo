@@ -10,6 +10,7 @@ inf = float('inf')
 def heap_Dijsktra(e, i):
     heap = []
     dis = get_dis(e, i)  # 得到初始节点到其他各个节点的初始距离字典，方便保存节点的索引
+    print(len(dis))
     for dic in dis:
         heapq.heappush(heap, [dis[dic], dic])
     visited = []  # 保存已访问过的节点
@@ -27,7 +28,7 @@ def heap_Dijsktra(e, i):
                 key[0] = new_dis
                 dis[key[1]] = new_dis
 
-    list_dis = [0 for _ in range(20)]
+    list_dis = [0 for _ in range(len(dis)+1)]
     for key in dis:  # 为方便后续使用，将字典转为list链表返回
         list_dis[key] = dis[key]
     return list_dis
@@ -50,6 +51,4 @@ case4 = [
     [inf, inf, 4, inf, 0]
 ]
 
-e = models.To_Graph()
-dis = heap_Dijsktra(e, 0)
-print(dis)
+
