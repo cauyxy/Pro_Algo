@@ -31,11 +31,10 @@ def Top_Sort(node):
     nums = []  # 用于存储各个节点的入度
     pre_list = FindPre(node)  # 找出学习改课程所需的所有前序课程
 
-    length = len(pre_list)
-    nums = [float('inf') for _ in range(20)]
+    nums = [float('inf') for _ in range(100)]
 
     for node in pre_list:
         nums[node.id - 1] = len(node.pre_list)
 
-    time, ans = TopSort(20, pre_list, nums)
+    time, ans = TopSort(100, pre_list, nums)
     return time, ans
